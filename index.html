@@ -33,7 +33,7 @@
         </div>
       </div>
       <div id="weather-data" class="hide">
-        <h2><i class="fa-solid fa-location-dot fa-bounce" style="color: #ff0000;"></i> <span id="city"></span> <img id="country"></img> </h2>
+        <h2><i class="fa-solid fa-location-dot fa-bounce" style="color: #ff0000;"></i> <span id="city" data-city=""></span> <img id="country"></img> </h2>
         
         <p id="temperature"><span></span>&deg;C</p>
         <h2><i class="fa-regular fa-clock fa-shake" style="color: #ffffff;"></i><p  id="timezone"><span></span></p></h2>
@@ -48,21 +48,17 @@
             <span></span>
           </p>
           <p id="wind">
-            <i class="fa-solid fa-wind"></i>
+            <i class="fa-solid fa-wind fa-fade"></i>
             <span></span>
           </p>
           
         </div>
         <div id="details-containe">
-          <p id="temp_max"><span></span></p>
+          <p id="temp_max"><i class="fa-solid fa-temperature-half" style="color: #ff0000;"></i><span></span>/</p>
           <p id="temp_min"><span></span></p>
-          
-      </div>
-
-      <div id="details-cont">
-        
-      </div>
-     
+          </div>
+     <button id="get-5-day-forecast">Previsão para 5 dias</button>
+     <div id="forecast" class="forecast-container"></div>
       </div>
       <div id="error-message" class="hide">
         <p>Não foi possível encontrar o clima de uma cidade com este nome.</p>
@@ -77,7 +73,7 @@
         <button id="vancouver">Vancouver</button>
         <button id="Lisboa">Lisboa</button>
         <button id="Orlando">Orlando</button>
-        <button id="osaka">Osaka</button>
+        <button id="Maldivas">Maldivas</button>
         <button id="maceio">Maceió</button>
       </div>
     </div>
