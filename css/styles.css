@@ -178,7 +178,7 @@ h3 {
 .forecast-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas iguais */
-  gap: 5px;
+  gap: 10px;
   justify-content: center; /* Espaço entre as colunas */
 }
 

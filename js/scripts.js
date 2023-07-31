@@ -24,28 +24,32 @@ const loader = document.querySelector("#loader")
 const suggestionContainer = document.querySelector("#suggestions")
 const suggestionButtons = document.querySelectorAll("#suggestions button")
 
+
+function clearForecast() {
+  const forecastDiv = document.getElementById("forecast");
+  forecastDiv.innerHTML = "";
+}
+
 function display5DayForecast(forecastList) {
-  const forecastDiv = document.getElementById("forecast")
+  const forecastDiv = document.getElementById("forecast");
 
   forecastList.forEach((item) => {
-    // Formatação da data em português
-    const date = new Date(item.dt * 1000).toLocaleDateString("pt-BR", {
-      weekday: "long",
-      day: "2-digit",
-      month: "long",
-    })
+    // Formatação da data em português com abreviação do dia da semana
+    const date = new Date(item.dt * 1000);
+    const weekday = date.toLocaleDateString("pt-BR", { weekday: "short" });
+    const dayAndMonth = date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
 
-    const temp = Math.floor(item.main.temp) // Utilize Math.floor() para obter apenas a parte inteira da temperatura
-    const description = translateWeatherDescription(item.weather[0].description)
-    const icon = item.weather[0].icon
+    const temp = Math.floor(item.main.temp);
+    const description = translateWeatherDescription(item.weather[0].description);
+    const icon = item.weather[0].icon;
 
-    const forecastItem = document.createElement("p")
-    forecastItem.innerHTML = `${date} ${temp}°C  ${description} <img src="http://openweathermap.org/img/wn/${icon}.png" alt="${description}">`
-    forecastDiv.appendChild(forecastItem)
-  })
+    const forecastItem = document.createElement("p");
+    forecastItem.innerHTML = `${weekday}<br> ${dayAndMonth}<br>${temp}°C<br>${description}<br><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${description}">`;
+    forecastDiv.appendChild(forecastItem);
+  });
 
   // Após a exibição da previsão de 5 dias, ocultar o elemento de carregamento
-  toggleLoader()
+  toggleLoader();
 }
 
 // Função para traduzir as descrições do clima para o português
@@ -70,10 +74,13 @@ function translateWeatherDescription(description) {
 }
 
 function get5DayForecast(city) {
+  // Limpa os dados anteriores antes de exibir a previsão de 5 dias
+  clearForecast();
+
   // Verifique se o campo de entrada tem um valor válido
   if (!city) {
     console.error("Digite o nome de uma cidade válida.")
-    return
+    return;
   }
 
   const apiKey = "38f3f0ee4349c5c1310ae1c4dbf3b56d"
@@ -119,12 +126,12 @@ function get5DayForecast(city) {
 
 // Adicione o evento de clique para o botão "Previsão para 5 dias"
 document.getElementById("get-5-day-forecast").addEventListener("click", () => {
-  const city = cityElement.dataset.city // Pegue o nome da cidade do atributo data-city
+  const city = cityElement.dataset.city; // Pegue o nome da cidade do atributo data-city
   if (city) {
-    get5DayForecast(city) // Use a função get5DayForecast em vez de get5DayForecastForCity
-    toggleLoader()
+    get5DayForecast(city); // Use a função get5DayForecast em vez de get5DayForecastForCity
+    toggleLoader();
   }
-})
+});
 
 // Function to format time with the new timezone
 const formatTimeWithTimeZone = (timezone) => {
@@ -221,6 +228,18 @@ cityInput.addEventListener("keyup", (e) => {
   }
 })
 
+// Evento de clique no botão de pesquisa
+searchBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const city = cityInput.value;
+
+  // Limpar a previsão de 5 dias antes de mostrar os dados do tempo atual para a cidade pesquisada
+  clearForecast();
+
+  showWeatherData(city);
+});
+
 // Sugestões
 suggestionButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -229,3 +248,4 @@ suggestionButtons.forEach((btn) => {
     showWeatherData(city)
   })
 })
+
