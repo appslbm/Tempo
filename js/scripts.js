@@ -37,14 +37,14 @@ function display5DayForecast(forecastList) {
     // Formatação da data em português com abreviação do dia da semana
     const date = new Date(item.dt * 1000);
     const weekday = date.toLocaleDateString("pt-BR", { weekday: "short" });
-    const dayAndMonth = date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
+    const dayAndMonth = date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
 
     const temp = Math.floor(item.main.temp);
     const description = translateWeatherDescription(item.weather[0].description);
     const icon = item.weather[0].icon;
 
     const forecastItem = document.createElement("p");
-    forecastItem.innerHTML = `${weekday}<br> ${dayAndMonth}<br>${temp}°C<br>${description}<br><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${description}">`;
+    forecastItem.innerHTML = `${weekday}<br><br>${dayAndMonth}<br><br>${temp}°C<br><br>${description}<br><img src="http://openweathermap.org/img/wn/${icon}.png" alt="${description}">`;
     forecastDiv.appendChild(forecastItem);
   });
 
@@ -56,9 +56,9 @@ function display5DayForecast(forecastList) {
 function translateWeatherDescription(description) {
   const translations = {
     "clear sky": "Céu Limpo",
-    "few clouds": "Poucas Nuvens",
-    "scattered clouds": "Nuvens Dispersas",
-    "broken clouds": "Nuvens Quebradas",
+    "few clouds": "Pouc Nuv",
+    "scattered clouds": "Nuv Disp",
+    "broken clouds": "Nuv Queb",
     "shower rain": "Chuva de Verão",
     rain: "Chuva",
     thunderstorm: "Trovoadas",
@@ -66,6 +66,7 @@ function translateWeatherDescription(description) {
     mist: "Nevoeiro",
     "overcast clouds": "Nublado",
     "light rain": "Chuva Leve",
+    "moderate rain": "Chuva Mod"
     // E assim por diante...
   }
 
