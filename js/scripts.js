@@ -56,7 +56,7 @@ function display5DayForecast(forecastList) {
 function translateWeatherDescription(description) {
   const translations = {
     "clear sky": "Céu Limpo",
-    "few clouds": "Pouc Nuv",
+    "few clouds": "Poucas Nuv",
     "scattered clouds": "Nuv Disp",
     "broken clouds": "Nuv Queb",
     "shower rain": "Chuva de Verão",
