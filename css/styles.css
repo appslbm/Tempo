@@ -172,14 +172,14 @@ h3 {
   background-color: #7c7c7c2b;
   border-radius: 25px;
   padding: 10px;
-  margin: 1rem;
+  margin: 1.5rem;
 }
 
 .forecast-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas iguais */
-  gap: 10px;
   justify-content: center; /* Espaço entre as colunas */
+  border-top: 1px solid #fff;
 }
 
 .forecast-container p {
@@ -188,4 +188,5 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 15px;
 }
